@@ -7,13 +7,15 @@ browser.get("http://gundam.wikia.com/wiki/Master_Grade#Lineup")
 
 kits = []
 dictionary = {}
+tableIteration = 1
 
-for year_release in range(1995, 2017):   
+for year_release in range(1995, 2018):
     browser.find_elements_by_link_text(str(year_release))[0].click()
     print "currently at year ", str(year_release)
-    table = browser.find_element_by_css_selector(".tabbertab:not(.tabbertabhide) > .wikitable")
+    table = browser.find_element_by_xpath("//*[@id='mw-content-text']/div/div[" + str(tableIteration) + "]")
+    tableIteration += 1
     tds = table.find_elements_by_css_selector("tr > td")
-    
+
     for i in range(len(tds)):
         if(i % 6 == 0):
             try:
